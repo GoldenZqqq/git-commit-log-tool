@@ -41,10 +41,13 @@ pip install pyyaml
 ```
 
 ### 配置说明
-root_directory: 指定要递归搜索 Git 仓库的根目录路径。可以是你在公司所有项目的根路径。<br/>
-author: 你的 Git 用户名，用于筛选当天你的所有提交记录。<br/>
-output_directory: 日报文件的保存路径，默认会保存在桌面上，但你也可以修改为其他路径。
-
+```yaml
+root_directory: "/path/to/repos"     # 必填，根目录，存放所有待扫描的 Git 仓库
+author: "your-git-username"          # 必填，Git 提交者名称
+output_directory: "/path/to/output"  # 可选，输出文件目录，默认输出到桌面
+start_date: "2024-10-14"             # 可选，查询提交记录的起始日期，格式: YYYY-MM-DD
+end_date: "2024-10-14"               # 可选，查询提交记录的结束日期，格式: YYYY-MM-DD
+```
 
 ### 使用说明
 
@@ -55,11 +58,17 @@ output_directory: 日报文件的保存路径，默认会保存在桌面上，�
 python main.py
 ```
 
-## 2. 查看工作日报
-脚本运行结束后，工具将在你指定的输出目录中生成一个工作日报文件。文件名将以当天日期命名，格式如下：
+## 2. 脚本输出
+脚本会递归查找 root_directory 下的所有 Git 仓库，获取指定作者的提交记录，并将其保存到指定的输出目录中。输出文件的文件名根据 start_date 和 end_date 动态生成，格式如下：
 
+1.如果不填写 start_date 和 end_date，则默认为当天日期。
 ```txt
 git_commits_YYYY-MM-DD.txt
+```
+2.如果填写了 start_date 和 end_date，则格式如下：
+
+```txt
+git_commits_YYYY-MM-DD_to_YYYY-MM-DD.txt
 ```
 文件内容将包含每个项目的详细提交记录，包括提交哈希、作者、提交时间和提交信息，此外还会生成一个简洁的提交消息汇总，适用于日常工作汇报。
 
@@ -71,11 +80,17 @@ Repository: C:\workspace\project1
 Hash: a1b2c3d4e5f6
 Author: YourGitUsername
 Date: 2024-10-14 12:34:56
-Message: 修复登录问题
+Message: fix: 修复登录问题
 
 Repository: C:\workspace\project2
 Hash: f6e5d4c3b2a1
 Author: YourGitUsername
-Date: 2024-10
-Message: 修复注册问题
+Date: 2024-10-14 23:45:23
+Message: feat: 增加第三方用户登录页面
+
+========================================
+Summary of all commit messages:
+
+project1 - 修复登录问题
+project2 - 增加第三方用户登录页面
 ```
