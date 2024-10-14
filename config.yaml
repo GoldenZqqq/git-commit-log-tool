@@ -1,0 +1,10 @@
+# config.yaml
+
+# 根目录 - 在这里定义要搜索的根路径
+root_directory: "C:\\workspace"
+
+# 指定过滤的作者
+author: "GoldenZqqq"
+
+# 输出文件存放的目录（默认是桌面）
+output_directory: "~/Desktop"
