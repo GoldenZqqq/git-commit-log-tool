@@ -82,7 +82,7 @@ Author: YourGitUsername
 Date: 2024-10-14 12:34:56
 Message: fix: 修复登录问题
 
-Repository: C:\workspace\project2
+Repository: C:\workspace\**project2**
 Hash: f6e5d4c3b2a1
 Author: YourGitUsername
 Date: 2024-10-14 23:45:23
@@ -94,3 +94,17 @@ Summary of all commit messages:
 project1 - 修复登录问题
 project2 - 增加第三方用户登录页面
 ```
+### 扩展功能
+未来可能扩展的功能包括：
+
+- **自动拉取项目所在分支最新代码后再进行日志提取。**
+- **支持通过命令行参数指定时间范围，覆盖 config.yaml 中的设置。**
+- **增加其他筛选条件，例如按提交消息关键字过滤。**
+- **提供更灵活的输出格式，如 JSON 或 CSV 格式的输出文件。**
+
+
+### 贡献
+欢迎提交 Pull Request 以改进此工具，或者报告问题与建议！
+
+### 许可证
+MIT License
