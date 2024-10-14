@@ -1,10 +1,14 @@
-# config.yaml
-
 # 根目录 - 在这里定义要搜索的根路径
-root_directory: "C:\\workspace"
+root_directory: "E:\\workspace"
 
 # 指定过滤的作者
 author: "GoldenZqqq"
 
 # 输出文件存放的目录（默认是桌面）
 output_directory: "~/Desktop"
+
+# 开始时间，可选，默认今天 2024-10-14
+start_date: "2024-10-12"
+
+# 结束时间，可选，默认今天 2024-10-14
+end_date: "2024-10-14"

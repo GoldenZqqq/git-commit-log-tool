@@ -38,7 +38,7 @@ def find_git_repos(root_dir, max_depth=None):
     return git_repos
 
 
-def get_git_commits_for_day_in_repo(repo_path, date_str, author):
+def get_git_commits(repo_path, start_date, end_date, author):
     """
     获取指定日期、作者的 git 提交记录。
 
@@ -52,8 +52,8 @@ def get_git_commits_for_day_in_repo(repo_path, date_str, author):
 
         git_log_command = [
             'git', 'log',
-            '--since="{} 00:00:00"'.format(date_str),
-            '--until="{} 23:59:59"'.format(date_str),
+            '--since="{} 00:00:00"'.format(start_date),
+            '--until="{} 23:59:59"'.format(end_date),
             '--author={}'.format(author),
             '--pretty=format:Hash: %H%nAuthor: %an%nDate: %ad%nMessage: %B%n',
             '--date=iso'
