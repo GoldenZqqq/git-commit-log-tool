@@ -40,24 +40,9 @@ pip install -r requirements.txt
 pip install pyyaml
 ```
 
-
-# config.yaml
-
-# 根目录：指定要搜索的项目根目录
-
-root_directory: "C:\\workspace"
-
-# 提交作者：你希望过滤出提交记录的作者
-
-author: "YourGitUsername"
-
-# 输出目录：生成的工作日报将保存到该目录，默认是桌面
-
-output_directory: "~/Desktop"
-
 ### 配置说明
-root_directory: 指定要递归搜索 Git 仓库的根目录路径。可以是你在公司所有项目的根路径。
-author: 你的 Git 用户名，用于筛选当天你的所有提交记录。
+root_directory: 指定要递归搜索 Git 仓库的根目录路径。可以是你在公司所有项目的根路径。<br/>
+author: 你的 Git 用户名，用于筛选当天你的所有提交记录。<br/>
 output_directory: 日报文件的保存路径，默认会保存在桌面上，但你也可以修改为其他路径。
 
 
