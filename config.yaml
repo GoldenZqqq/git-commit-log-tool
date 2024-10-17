@@ -1,5 +1,5 @@
 # 根目录 - 在这里定义要搜索的根路径
-root_directory: "E:\\workspace"
+root_directory: "C:\\workspace"
 
 # 指定过滤的作者
 author: "GoldenZqqq"
