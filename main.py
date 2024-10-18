@@ -13,11 +13,19 @@ if __name__ == "__main__":
 
     # 获取当前日期
     today = datetime.datetime.now().strftime('%Y-%m-%d')
+    
+    # 从配置获取日期，若未提供则使用今天的日期
     start_date = config.get("start_date", today)
     end_date = config.get("end_date", today)
 
+    # 确保start_date和end_date是有效的日期
+    if not start_date:
+        start_date = today
+    if not end_date:
+        end_date = today
+
     # 根据日期动态生成文件名
-    if start_date == end_date == today:
+    if start_date == today and end_date == today:
         date_part = today  # 当天
     else:
         date_part = f"{start_date}_to_{end_date}"  # 日期范围
