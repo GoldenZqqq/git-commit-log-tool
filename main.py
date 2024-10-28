@@ -18,6 +18,9 @@ if __name__ == "__main__":
     start_date = config.get("start_date", today)
     end_date = config.get("end_date", today)
 
+    # 获取详细输出配置，若未提供则使用默认值
+    detailed_output = config.get('detailed_output', True)  # 默认值为 True
+
     # 确保start_date和end_date是有效的日期
     if not start_date:
         start_date = today
@@ -46,6 +49,6 @@ if __name__ == "__main__":
     output_file = os.path.join(os.path.expanduser(output_directory), f"git_commits_{date_part}.txt")
     
     if all_commits:
-        save_commits_to_file(all_commits, all_messages, output_file)
+        save_commits_to_file(all_commits, all_messages, output_file, detailed_output)
     else:
         print(f"No commits found for {start_date} to {end_date}")

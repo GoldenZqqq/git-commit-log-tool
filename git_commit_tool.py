@@ -96,23 +96,24 @@ def clean_commit_message(message):
     return cleaned_message
 
 
-def save_commits_to_file(commits, messages, output_file):
+def save_commits_to_file(commits, messages, output_file, detailed_output):
     """
     将所有仓库的 commit 记录保存到指定文件，并在文件末尾汇总所有的提交 message。
     
     :param commits: commit 记录列表。
     :param messages: 所有 commit 的 message 列表（包含 repo 路径信息）。
     :param output_file: 输出文件路径。
+    :param detailed_output: 布尔值，控制是否输出详细记录。
     """
     try:
         output_file = os.path.abspath(output_file)
 
         with open(output_file, 'w', encoding='utf-8') as f:
-            for commit in commits:
-                f.write(commit + '\n\n')
-            
-            f.write('\n' + '='*40 + '\n')
-            f.write('Summary of all commit messages:\n\n')
+            if detailed_output:
+                for commit in commits:
+                    f.write(commit + '\n\n')
+                    f.write('\n' + '='*40 + '\n')
+                    f.write('Summary of all commit messages:\n\n')
             
             for entry in messages:
                 if isinstance(entry, tuple) and len(entry) == 2:

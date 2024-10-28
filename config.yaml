@@ -12,3 +12,6 @@ start_date: ""
 
 # 结束时间，可选，默认今天 2024-10-14
 end_date: ""
+
+# 是否输出详细日志，可选，默认 true
+detailed_output: true
