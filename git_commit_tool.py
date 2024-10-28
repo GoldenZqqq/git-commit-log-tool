@@ -36,6 +36,14 @@ def find_git_repos(root_dir, max_depth=None):
             dirs[:] = []  # 防止递归进入子目录
 
     return git_repos
+        
+def get_current_branch(repo_path):
+    """获取当前Git分支名称"""
+    try:
+        os.chdir(repo_path)  # 切换到指定的仓库路径
+        return subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
+    except subprocess.CalledProcessError:
+        return "unknown branch"
 
 
 def get_git_commits(repo_path, start_date, end_date, author):
@@ -120,7 +128,11 @@ def save_commits_to_file(commits, messages, output_file, detailed_output):
                     repo_path, message = entry
                     project_name = os.path.basename(repo_path)
                     cleaned_message = clean_commit_message(message)
-                    f.write(f"{project_name} - {cleaned_message}\n")
+                    
+                    # 获取当前分支名称
+                    current_branch = get_current_branch(repo_path)
+                    f.write(f"{project_name}({current_branch}) - {cleaned_message}\n")
+                    
         
         print(f"File successfully saved at: {output_file}")
     except Exception as e:
