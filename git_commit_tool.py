@@ -104,7 +104,7 @@ def clean_commit_message(message):
     return cleaned_message
 
 
-def save_commits_to_file(commits, messages, output_file, detailed_output):
+def save_commits_to_file(commits, messages, output_file, detailed_output, project_names,show_project_and_branch):
     """
     将所有仓库的 commit 记录保存到指定文件，并在文件末尾汇总所有的提交 message。
     
@@ -112,6 +112,8 @@ def save_commits_to_file(commits, messages, output_file, detailed_output):
     :param messages: 所有 commit 的 message 列表（包含 repo 路径信息）。
     :param output_file: 输出文件路径。
     :param detailed_output: 布尔值，控制是否输出详细记录。
+    :param project_names: 项目名称映射字典。
+    :param show_project_and_branch: 布尔值，控制是否显示项目名与分支名。
     """
     try:
         output_file = os.path.abspath(output_file)
@@ -128,10 +130,20 @@ def save_commits_to_file(commits, messages, output_file, detailed_output):
                     repo_path, message = entry
                     project_name = os.path.basename(repo_path)
                     cleaned_message = clean_commit_message(message)
-                    
                     # 获取当前分支名称
                     current_branch = get_current_branch(repo_path)
-                    f.write(f"{project_name}({current_branch}) - {cleaned_message}\n")
+                    # 根据 项目名+分支名称 获取自定义字典中的项目中文名
+                    custom_project_name = project_names.get(f"{project_name}({current_branch})", "")  
+
+                    # 生成输出内容
+                    if show_project_and_branch:
+                        # 显示项目名和分支名
+                        output_line = f"{project_name}({current_branch}) - {custom_project_name}{cleaned_message}\n"
+                    else:
+                        # 不显示项目名和分支名
+                        output_line = f"{custom_project_name}{cleaned_message}\n"
+
+                    f.write(output_line)
                     
         
         print(f"File successfully saved at: {output_file}")

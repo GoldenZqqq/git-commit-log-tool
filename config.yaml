@@ -15,3 +15,9 @@ end_date: ""
 
 # 是否输出详细日志，可选，默认 true
 detailed_output: true
+
+# 是否在最后的总结日志输出中列出每行的项目名与分支名，默认 true
+show_project_and_branch: true
+
+# 自定义项目名称
+project_names:
