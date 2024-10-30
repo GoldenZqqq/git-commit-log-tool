@@ -46,18 +46,25 @@ def get_current_branch(repo_path):
         return "unknown branch"
 
 
-def get_git_commits(repo_path, start_date, end_date, author):
+def get_git_commits(repo_path, start_date, end_date, author, pull_latest_code):
     """
-    获取指定日期、作者的 git 提交记录。
+    获取指定日期、作者的 git 提交记录，并在获取之前拉取最新代码。
 
     :param repo_path: 仓库路径
     :param date_str: 日期字符串，格式为 'YYYY-MM-DD'
     :param author: 作者名
+    :param pull_latest_code: 是否拉取最新代码
     :return: 提交记录和提交信息列表
     """
     try:
         os.chdir(repo_path)
 
+        # 根据配置决定是否拉取最新代码
+        if pull_latest_code:
+            pull_command = ['git', 'pull']
+            subprocess.run(pull_command, check=True)
+
+        # 获取提交记录
         git_log_command = [
             'git', 'log',
             '--since="{} 00:00:00"'.format(start_date),

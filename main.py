@@ -11,11 +11,12 @@ if __name__ == "__main__":
     author = config.get('author', 'YourName')
     output_directory = config.get('output_directory', '~/Desktop')
     today = datetime.datetime.now().strftime('%Y-%m-%d') # 获取当前日期
-    start_date = config.get("start_date", today) # 从配置获取日期，若未提供则使用今天的日期
-    end_date = config.get("end_date", today) # 从配置获取日期，若未提供则使用今天的日期
-    detailed_output = config.get('detailed_output', True)  # 默认值为 True
+    start_date = config.get("start_date", today) # 从配置获取开始日期，若未提供则使用今天的日期
+    end_date = config.get("end_date", today) # 从配置获取结束日期，若未提供则使用今天的日期
+    detailed_output = config.get('detailed_output', True)  # 是否输出详细日志
     project_names = config.get('project_names', {})  # 获取项目名称映射
     show_project_and_branch = config.get('show_project_and_branch', True)  # 获取控制输出的配置
+    pull_latest_code = config.get('pull_latest_code', False)  # 是否在提取日志之前拉取最新代码
 
     # 确保start_date和end_date是有效的日期
     if not start_date:
@@ -36,7 +37,7 @@ if __name__ == "__main__":
 
     # 遍历每个仓库，获取提交记录
     for repo in git_repos:
-        commits, messages = get_git_commits(repo, start_date, end_date, author)
+        commits, messages = get_git_commits(repo, start_date, end_date, author, pull_latest_code)
         if commits:
             all_commits.extend(commits)
             all_messages.extend(messages)

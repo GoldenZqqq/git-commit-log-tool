@@ -19,5 +19,8 @@ detailed_output: true
 # 是否在最后的总结日志输出中列出每行的项目名与分支名，默认 true
 show_project_and_branch: true
 
+# 是否在提取日志之前拉取最新代码，默认 false
+pull_latest_code: false
+
 # 自定义项目名称
 project_names:
