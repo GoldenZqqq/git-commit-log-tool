@@ -22,5 +22,9 @@ show_project_and_branch: true
 # 是否在提取日志之前拉取最新代码，默认 false
 pull_latest_code: false
 
-# 自定义项目名称
+# 是否提取所有分支的提交记录，默认 false 只提取当前分支
+extract_all_branches: false
+
+# 自定义项目名称，格式为：项目名(分支名): "项目名称-"    
+# ep: "ruoyi-vue-admin(master): "若依后台管理系统-"
 project_names:

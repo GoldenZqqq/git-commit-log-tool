@@ -46,7 +46,7 @@ def get_current_branch(repo_path):
         return "unknown branch"
 
 
-def get_git_commits(repo_path, start_date, end_date, author, pull_latest_code):
+def get_git_commits(repo_path, start_date, end_date, author, pull_latest_code, extract_all_branches):
     """
     获取指定日期、作者的 git 提交记录，并在获取之前拉取最新代码。
 
@@ -54,6 +54,7 @@ def get_git_commits(repo_path, start_date, end_date, author, pull_latest_code):
     :param date_str: 日期字符串，格式为 'YYYY-MM-DD'
     :param author: 作者名
     :param pull_latest_code: 是否拉取最新代码
+    :param extract_all_branches: 是否提取所有分支的提交记录
     :return: 提交记录和提交信息列表
     """
     try:
@@ -64,33 +65,44 @@ def get_git_commits(repo_path, start_date, end_date, author, pull_latest_code):
             pull_command = ['git', 'pull']
             subprocess.run(pull_command, check=True)
 
-        # 获取提交记录
-        git_log_command = [
-            'git', 'log',
-            '--since="{} 00:00:00"'.format(start_date),
-            '--until="{} 23:59:59"'.format(end_date),
-            '--author={}'.format(author),
-            '--pretty=format:Hash: %H%nAuthor: %an%nDate: %ad%nMessage: %B%n',
-            '--date=iso'
-        ]
-        result = subprocess.run(git_log_command, capture_output=True, text=True, check=True, encoding='utf-8')
-
-        if result.stdout is None:
-            print(f"Error: No output from git log in {repo_path}")
-            return [], []
-        
         commits = []
         messages = []
 
-        for commit in result.stdout.strip().split('\n\n'):
-            if commit:
-                cleaned_commit = f"Repository: {repo_path}\n{commit.strip()}"
-                commits.append(cleaned_commit)
+        if extract_all_branches:
+            # 获取所有分支的提交记录
+            git_log_command = [
+                'git', 'log',
+                '--all',
+                '--since="{} 00:00:00"'.format(start_date),
+                '--until="{} 23:59:59"'.format(end_date),
+                '--author={}'.format(author),
+                '--pretty=format:Hash: %H%nAuthor: %an%nDate: %ad%nMessage: %B%n',
+                '--date=iso'
+            ]
+        else:
+            # 获取当前分支的提交记录
+            git_log_command = [
+                'git', 'log',
+                '--since="{} 00:00:00"'.format(start_date),
+                '--until="{} 23:59:59"'.format(end_date),
+                '--author={}'.format(author),
+                '--pretty=format:Hash: %H%nAuthor: %an%nDate: %ad%nMessage: %B%n',
+                '--date=iso'
+            ]
 
-                message_start = commit.find('Message:')
-                if message_start != -1:
-                    message = commit[message_start + len('Message:'):].strip()
-                    messages.append((repo_path, message))
+
+        result = subprocess.run(git_log_command, capture_output=True, text=True, check=True, encoding='utf-8')
+
+        if result.stdout:
+            for commit in result.stdout.strip().split('\n\n'):
+                if commit:
+                    cleaned_commit = f"Repository: {repo_path}\n{commit.strip()}"
+                    commits.append(cleaned_commit)
+
+                    message_start = commit.find('Message:')
+                    if message_start != -1:
+                        message = commit[message_start + len('Message:'):].strip()
+                        messages.append((repo_path, message))
 
         return commits, messages
     
@@ -111,7 +123,7 @@ def clean_commit_message(message):
     return cleaned_message
 
 
-def save_commits_to_file(commits, messages, output_file, detailed_output, project_names,show_project_and_branch):
+def save_commits_to_file(commits, messages, output_file, detailed_output, project_names, show_project_and_branch):
     """
     将所有仓库的 commit 记录保存到指定文件，并在文件末尾汇总所有的提交 message。
     

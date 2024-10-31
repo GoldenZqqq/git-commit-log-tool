@@ -17,6 +17,7 @@ if __name__ == "__main__":
     project_names = config.get('project_names', {})  # 获取项目名称映射
     show_project_and_branch = config.get('show_project_and_branch', True)  # 获取控制输出的配置
     pull_latest_code = config.get('pull_latest_code', False)  # 是否在提取日志之前拉取最新代码
+    extract_all_branches = config.get('extract_all_branches', False)  # 是否提取所有分支的提交记录
 
     # 确保start_date和end_date是有效的日期
     if not start_date:
@@ -37,7 +38,7 @@ if __name__ == "__main__":
 
     # 遍历每个仓库，获取提交记录
     for repo in git_repos:
-        commits, messages = get_git_commits(repo, start_date, end_date, author, pull_latest_code)
+        commits, messages = get_git_commits(repo, start_date, end_date, author, pull_latest_code, extract_all_branches)
         if commits:
             all_commits.extend(commits)
             all_messages.extend(messages)
