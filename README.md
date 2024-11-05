@@ -47,6 +47,11 @@ author: "your-git-username"          # 必填，Git 提交者名称
 output_directory: "/path/to/output"  # 可选，输出文件目录，默认输出到桌面
 start_date: "2024-10-14"             # 可选，查询提交记录的起始日期，格式: YYYY-MM-DD
 end_date: "2024-10-14"               # 可选，查询提交记录的结束日期，格式: YYYY-MM-DD
+detailed_output: true                # 是否输出详细日志，默认为 true
+show_project_and_branch: true        # 是否在最后的总结日志输出中列出每行的项目名与分支名，默认 true
+pull_latest_code: false              # 是否在提取日志之前拉取最新代码，默认 false 
+extract_all_branches: false          # 是否提取所有分支的提交记录，默认 false 只提取当前分支
+project_names: false                 # 自定义项目名称吗，字典格式，格式为：项目名(分支名): "项目名称-"
 ```
 
 ### 使用说明
@@ -82,7 +87,7 @@ Author: YourGitUsername
 Date: 2024-10-14 12:34:56
 Message: fix: 修复登录问题
 
-Repository: C:\workspace\**project2**
+Repository: C:\workspace\project2
 Hash: f6e5d4c3b2a1
 Author: YourGitUsername
 Date: 2024-10-14 23:45:23
@@ -91,8 +96,8 @@ Message: feat: 增加第三方用户登录页面
 ========================================
 Summary of all commit messages:
 
-project1 - 修复登录问题
-project2 - 增加第三方用户登录页面
+project1 - 若依后台管理系统-修复登录问题
+project2 - 若依商城用户端H5-增加第三方用户登录页面
 ```
 ### 扩展功能
 未来可能扩展的功能包括：
