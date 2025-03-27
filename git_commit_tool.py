@@ -149,21 +149,23 @@ def save_commits_to_file(commits, messages, output_file, detailed_output, projec
                     repo_path, message = entry
                     project_name = os.path.basename(repo_path)
                     cleaned_message = clean_commit_message(message)
-                    # 获取当前分支名称
                     current_branch = get_current_branch(repo_path)
-                    # 根据 项目名+分支名称 获取自定义字典中的项目中文名
-                    custom_project_name = project_names.get(f"{project_name}({current_branch})", "")  
+                    
+                    # 首先检查是否有精确匹配的项目名+分支名
+                    custom_project_name = project_names.get(f"{project_name}({current_branch})", "")
+                    
+                    # 如果没有精确匹配，检查是否有通配符匹配
+                    if not custom_project_name:
+                        wildcard_key = f"{project_name}(*)"
+                        custom_project_name = project_names.get(wildcard_key, "")
 
                     # 生成输出内容
                     if show_project_and_branch:
-                        # 显示项目名和分支名
                         output_line = f"{project_name}({current_branch}) - {custom_project_name}{cleaned_message}\n"
                     else:
-                        # 不显示项目名和分支名
                         output_line = f"{custom_project_name}{cleaned_message}\n"
 
                     f.write(output_line)
-                    
         
         print(f"File successfully saved at: {output_file}")
     except Exception as e:
