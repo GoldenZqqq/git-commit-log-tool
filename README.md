@@ -247,87 +247,49 @@ python build.py
 - `dist/GitCommitTool.exe` - 独立可执行文件
 - `GitCommitTool_Portable/` - 包含所有文件的便携版
 
-### 🛠️ 配置说明
+### 🛠️ 配置
 
-工具使用灵活的 YAML 配置文件：
+工具使用模板化配置管理系统，确保个人配置安全：
+
+#### 📋 配置文件结构
+```
+config.template.yaml  # 配置模板 (版本控制)
+config.yaml          # 个人配置 (自动忽略)
+```
+
+#### 🔄 首次配置
+程序启动时会自动从模板创建个人配置文件：
 
 ```yaml
-# 仓库设置
-root_directory: "C:\\workspace"          # 扫描的根目录
-author: "你的Git用户名"                   # Git 作者名
-output_directory: "~/Desktop"            # 输出位置
+# 基本配置
+root_directory: "C:\\workspace"          # Git仓库根目录
+author: "你的Git用户名"                   # Git作者名  
+output_directory: "~/Desktop"           # 输出目录
 
-# 日期范围（可选）
-start_date: "2024-01-01"                # 开始日期 (YYYY-MM-DD)
-end_date: "2024-01-31"                  # 结束日期 (YYYY-MM-DD)
+# 时间范围 (可选)
+start_date: ""                          # 开始日期 YYYY-MM-DD
+end_date: ""                            # 结束日期 YYYY-MM-DD
 
 # 输出选项
-detailed_output: true                    # 包含详细日志
+detailed_output: true                   # 详细日志
 show_project_and_branch: true          # 显示项目/分支名
 
 # 高级选项
-pull_latest_code: false                 # 提取前拉取最新代码
-extract_all_branches: false            # 从所有分支提取
+pull_latest_code: false                 # 提取前拉取代码
+extract_all_branches: false            # 提取所有分支
 
 # 项目名称映射
 project_names:
-  "my-project(master)": "我的项目 - "
-  "api-service(develop)": "后端API - "
+  "my-project(master)": "我的项目-"
+  "api-service(develop)": "后端API-"
 ```
+
+#### 🔧 配置管理
+- **个人配置**: 编辑 `config.yaml` 设置你的路径和偏好
+- **配置更新**: 程序更新时会自动合并新的配置选项
+- **备份恢复**: 支持配置文件备份和恢复
+- **详细指南**: 查看 [配置管理指南](./CONFIG_MANAGEMENT.md)
 
 ### 📋 输出示例
 
 ```
-🎯 提交记录摘要 (2024-01-15):
-
-我的项目 - 添加用户认证系统
-我的项目 - 修复登录验证bug
-后端API - 实现新的REST接口
-后端API - 更新数据库架构
-移动应用 - 增强UI响应性
-
-📊 总计：3个项目共5次提交
-⏱️ 生成时间：2024-01-15 18:30:22
-```
-
-### 🎨 界面截图
-
-<div align="center">
-
-![GUI主界面](docs/screenshots/gui-main.png)
-*现代化直观的GUI界面*
-
-![配置面板](docs/screenshots/gui-config.png)
-*易于使用的配置面板*
-
-</div>
-
-### 🤝 贡献指南
-
-我们欢迎任何形式的贡献！请查看我们的[贡献指南](CONTRIBUTING.md)了解详情。
-
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 创建 Pull Request
-
-### 📄 许可证
-
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
-
-### 🙏 致谢
-
-- 感谢所有为改进此工具做出贡献的开发者
-- 灵感来源于全世界开发者的日常需求
-- 用 ❤️ 和大量的 ☕ 精心打造
-
----
-
-<div align="center">
-
-### 🌟 如果这个项目对你有帮助，请给个星标！ 
-
-**Made with ❤️ by developers, for developers**
-
-</div>

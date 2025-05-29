@@ -1,0 +1,59 @@
+# Git 提交日志提取工具 - 配置文件模板
+# 复制此文件为 config.yaml 并根据需要修改配置
+
+# 基本配置
+root_directory: "C:\\workspace"          # Git仓库根目录 (必填)
+                                        # 示例: "C:\\workspace" 或 "/home/user/projects"
+                                        # 工具会递归扫描此目录下的所有Git仓库
+
+author: "YourGitUsername"               # Git作者名 (必填)
+                                        # 必须与Git配置中的 user.name 一致
+                                        # 可通过 git config user.name 查看
+
+output_directory: "~/Desktop"           # 输出目录 (必填)
+                                        # 示例: "~/Desktop" 或 "C:\\Users\\You\\Documents"
+                                        # 生成的日志文件将保存到此目录
+
+# 时间范围配置 (可选)
+start_date: ""                          # 开始日期，格式: YYYY-MM-DD
+                                        # 留空默认为今天
+                                        # 示例: "2024-01-01"
+
+end_date: ""                            # 结束日期，格式: YYYY-MM-DD  
+                                        # 留空默认为今天
+                                        # 示例: "2024-01-31"
+
+# 输出选项
+detailed_output: true                   # 是否输出详细日志 (true/false)
+                                        # true: 包含完整提交信息（哈希、时间等）
+                                        # false: 仅输出简洁的提交消息
+
+show_project_and_branch: true          # 是否显示项目名与分支名 (true/false)
+                                        # true: 在摘要中显示项目和分支信息
+                                        # false: 仅显示提交消息
+
+# 高级选项
+pull_latest_code: false                # 提取前是否拉取最新代码 (true/false)
+                                        # true: 在提取前自动执行 git pull
+                                        # 注意: 需要确保仓库没有未提交的更改
+
+extract_all_branches: false            # 是否提取所有分支的提交记录 (true/false)
+                                        # true: 提取所有分支的提交
+                                        # false: 仅提取当前分支
+
+# 项目名称映射 (可选)
+# 格式: "原项目名(分支名)": "自定义显示名称"
+# 支持通配符: "项目名(*)": "显示名称" 匹配所有分支
+project_names:
+  # 精确匹配示例
+  # "my-api(master)": "生产API-"
+  # "my-api(develop)": "开发API-"
+  
+  # 通配符匹配示例  
+  # "frontend(*)": "前端项目-"
+  # "backend(*)": "后端服务-"
+  
+  # 复杂项目示例
+  # "ecommerce-api(master)": "电商后端API-"
+  # "mobile-app(develop)": "移动应用-"
+  # "admin-panel(*)": "管理后台-" 

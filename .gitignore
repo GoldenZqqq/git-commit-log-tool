@@ -156,6 +156,7 @@ Thumbs.db
 # Application specific
 git_commits_*.txt
 config_backup.yaml
+config.yaml
 
 # Temporary files
 *.tmp

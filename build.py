@@ -18,6 +18,7 @@ def install_dependencies():
         'pyinstaller',
         'pyyaml',
         'pillow',  # 如果需要图标支持
+        'tkcalendar',  # 日期选择器
     ]
     
     for dep in dependencies:
@@ -117,7 +118,7 @@ VSVersionInfo(
       StringTable(
         u'040904B0',
         [StringStruct(u'CompanyName', u'Git提交日志提取工具'),
-         StringStruct(u'FileDescription', u'Git提交日志提取工具 - 摸鱼神器'),
+         StringStruct(u'FileDescription', u'Git提交日志提取工具 - 摸鱼神器 v1.0'),
          StringStruct(u'FileVersion', u'1.0.0.0'),
          StringStruct(u'InternalName', u'GitCommitTool'),
          StringStruct(u'LegalCopyright', u'Copyright © 2024'),

@@ -3,16 +3,52 @@ import datetime
 import subprocess
 import yaml  # 用来读取 YAML 配置文件
 import re
+import shutil
 
 def load_config(config_file="config.yaml"):
     """
-    从配置文件中加载配置项。
+    从配置文件中加载配置项。如果配置文件不存在，则从模板创建。
     
     :param config_file: 配置文件路径
     :return: 配置项的字典
     """
-    with open(config_file, 'r', encoding='utf-8') as file:
-        return yaml.safe_load(file)
+    # 如果配置文件不存在，尝试从模板创建
+    if not os.path.exists(config_file):
+        template_file = "config.template.yaml"
+        if os.path.exists(template_file):
+            print(f"⚠️ 配置文件 {config_file} 不存在")
+            print(f"📋 正在从模板 {template_file} 创建配置文件...")
+            
+            try:
+                shutil.copy2(template_file, config_file)
+                print(f"✅ 已创建配置文件: {config_file}")
+                print(f"💡 请编辑 {config_file} 文件设置你的个人配置")
+            except Exception as e:
+                print(f"❌ 创建配置文件失败: {e}")
+                print(f"💡 请手动复制 {template_file} 为 {config_file}")
+        else:
+            print(f"❌ 配置文件 {config_file} 和模板文件 {template_file} 都不存在")
+            print("💡 请创建配置文件或检查文件路径")
+            # 返回默认配置
+            return {
+                'root_directory': '',
+                'author': '',
+                'output_directory': '',
+                'start_date': '',
+                'end_date': '',
+                'detailed_output': True,
+                'show_project_and_branch': True,
+                'pull_latest_code': False,
+                'extract_all_branches': False,
+                'project_names': {}
+            }
+    
+    try:
+        with open(config_file, 'r', encoding='utf-8') as file:
+            return yaml.safe_load(file)
+    except Exception as e:
+        print(f"❌ 读取配置文件失败: {e}")
+        return {}
 
 
 def find_git_repos(root_dir, max_depth=None):
