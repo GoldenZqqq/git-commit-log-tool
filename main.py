@@ -1,3 +1,10 @@
+'''
+Description: 
+Author: Huang Zhaoqi
+LastEditors: Huang Zhaoqi
+Date: 2024-10-14 16:43:27
+LastEditTime: 2025-05-29 09:57:41
+'''
 from git_commit_tool import find_git_repos, get_git_commits, save_commits_to_file, load_config
 import os
 import datetime
