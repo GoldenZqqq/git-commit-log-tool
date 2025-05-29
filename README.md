@@ -134,7 +134,6 @@ project_names:
 - **Personal Config**: Edit `config.yaml` to set your paths and preferences
 - **Config Updates**: Program automatically merges new configuration options
 - **Backup & Restore**: Supports configuration backup and restore
-- **Detailed Guide**: See [Configuration Management Guide](./CONFIG_MANAGEMENT.md)
 
 ### 📋 Sample Output
 
@@ -291,7 +290,6 @@ project_names:
 - **个人配置**: 编辑 `config.yaml` 设置你的路径和偏好
 - **配置更新**: 程序更新时会自动合并新的配置选项
 - **备份恢复**: 支持配置文件备份和恢复
-- **详细指南**: 查看 [配置管理指南](./CONFIG_MANAGEMENT.md)
 
 ### 📋 输出示例
 

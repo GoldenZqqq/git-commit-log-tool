@@ -163,3 +163,6 @@ config.yaml
 *.temp
 temp/
 tmp/
+
+# Internal documentation (not for GitHub)
+docs/
