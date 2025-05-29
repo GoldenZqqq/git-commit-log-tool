@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python Version](https://img.shields.io/badge/python-3.7+-blue.svg)](https://python.org)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)](https://github.com/yourusername/git-commit-log-tool)
-[![GUI](https://img.shields.io/badge/GUI-tkinter-green.svg)](https://docs.python.org/3/library/tkinter.html)
+[![GUI](https://img.shields.io/badge/GUI-Material_UI-green.svg)](https://docs.python.org/3/library/tkinter.html)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/yourusername/git-commit-log-tool)
 
 **Language / 语言**: [🇺🇸 English](#english) | [🇨🇳 中文](#中文)
@@ -16,7 +16,7 @@
 
 </div>
 
-## 🇺🇸 English
+## English
 
 ### 📖 Overview
 
@@ -26,14 +26,14 @@
 
 - 🔍 **Smart Repository Discovery** - Automatically scans and finds all Git repositories in specified directories
 - 👤 **Author-Based Filtering** - Extract commits only from specific authors
-- 📅 **Flexible Date Range** - Support for single day or custom date range extraction
+- 📅 **Visual Date Picker** - Easy date selection with calendar widget and quick shortcuts
 - 🎯 **Detailed & Summary Views** - Choose between detailed logs or concise summaries
 - 🏷️ **Project Name Mapping** - Customize project names for better readability
 - 🔄 **Auto-Pull Support** - Optionally pull latest changes before extraction
 - 🌿 **Branch Control** - Extract from current branch or all branches
-- 🖥️ **Beautiful GUI** - Intuitive graphical interface for easy configuration
+- 🖥️ **Material UI Design** - Modern, intuitive graphical interface
 - 📦 **Portable Executable** - Standalone `.exe` file for Windows users
-- ⚙️ **Configuration Management** - Save and load settings automatically
+- ⚙️ **Template-Based Config** - Secure configuration management system
 
 ### 🎯 Perfect For
 
@@ -58,7 +58,7 @@
    - Set your repository root directory
    - Enter your Git author name
    - Choose output directory
-   - Adjust advanced options as needed
+   - Use the visual date picker for date ranges
 
 3. **Extract Logs**
    - Click "🚀 Start Extraction" and watch the magic happen!
@@ -72,8 +72,8 @@
 
 2. **Configure**
    ```bash
-   # Edit config.yaml with your settings
-   nano config.yaml
+   # Configuration file will be auto-created from template
+   python gui.py
    ```
 
 3. **Run**
@@ -95,31 +95,46 @@ This will create:
 
 ### 🛠️ Configuration
 
-The tool uses a flexible YAML configuration file:
+The tool uses a template-based configuration management system for security:
+
+#### 📋 Configuration Structure
+```
+config.template.yaml  # Configuration template (version controlled)
+config.yaml          # Personal config (auto-ignored)
+```
+
+#### 🔄 First-time Setup
+The program automatically creates personal config from template:
 
 ```yaml
-# Repository settings
-root_directory: "C:\\workspace"          # Root directory to scan
-author: "YourGitUsername"                # Git author name
-output_directory: "~/Desktop"            # Output location
+# Basic Configuration
+root_directory: "C:\\workspace"          # Git repository root
+author: "YourGitUsername"               # Git author name  
+output_directory: "~/Desktop"           # Output directory
 
-# Date range (optional)
-start_date: "2024-01-01"                # Start date (YYYY-MM-DD)
-end_date: "2024-01-31"                  # End date (YYYY-MM-DD)
+# Time Range (optional)
+start_date: ""                          # Start date YYYY-MM-DD
+end_date: ""                            # End date YYYY-MM-DD
 
-# Output options
-detailed_output: true                    # Include detailed logs
+# Output Options
+detailed_output: true                   # Detailed logs
 show_project_and_branch: true          # Show project/branch names
 
-# Advanced options
+# Advanced Options
 pull_latest_code: false                 # Pull before extraction
-extract_all_branches: false            # Extract from all branches
+extract_all_branches: false            # Extract all branches
 
-# Project name mapping
+# Project Name Mapping
 project_names:
-  "my-project(master)": "My Awesome Project - "
+  "my-project(master)": "My Project - "
   "api-service(develop)": "Backend API - "
 ```
+
+#### 🔧 Configuration Management
+- **Personal Config**: Edit `config.yaml` to set your paths and preferences
+- **Config Updates**: Program automatically merges new configuration options
+- **Backup & Restore**: Supports configuration backup and restore
+- **Detailed Guide**: See [Configuration Management Guide](./CONFIG_MANAGEMENT.md)
 
 ### 📋 Sample Output
 
@@ -135,18 +150,6 @@ Mobile App - Enhanced UI responsiveness
 📊 Total: 5 commits across 3 projects
 ⏱️ Generated on: 2024-01-15 18:30:22
 ```
-
-### 🎨 Screenshots
-
-<div align="center">
-
-![GUI Main Interface](docs/screenshots/gui-main.png)
-*Modern and intuitive GUI interface*
-
-![Configuration Panel](docs/screenshots/gui-config.png)
-*Easy-to-use configuration panel*
-
-</div>
 
 ### 🤝 Contributing
 
@@ -170,7 +173,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🇨🇳 中文
+## 中文
 
 ### 📖 项目简介
 
@@ -180,14 +183,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - 🔍 **智能仓库发现** - 自动扫描并找到指定目录下的所有 Git 仓库
 - 👤 **作者筛选** - 按指定作者提取提交记录
-- 📅 **灵活日期范围** - 支持单日或自定义日期范围提取
+- 📅 **可视化日期选择** - 日历控件选择日期，支持快捷日期设置
 - 🎯 **详细&摘要视图** - 可选择详细日志或简洁摘要
 - 🏷️ **项目名称映射** - 自定义项目名称，提高可读性
 - 🔄 **自动拉取支持** - 可选择在提取前拉取最新代码
 - 🌿 **分支控制** - 从当前分支或所有分支提取
-- 🖥️ **精美GUI界面** - 直观的图形界面，配置简单
+- 🖥️ **Material UI设计** - 现代化直观的图形界面
 - 📦 **便携执行文件** - Windows 用户可使用独立的 `.exe` 文件
-- ⚙️ **配置管理** - 自动保存和加载设置
+- ⚙️ **模板化配置** - 安全的配置管理系统
 
 ### 🎯 适用场景
 
@@ -212,7 +215,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
    - 设置仓库根目录
    - 输入 Git 作者名
    - 选择输出目录
-   - 根据需要调整高级选项
+   - 使用可视化日期选择器设置日期范围
 
 3. **提取日志**
    - 点击 "🚀 开始提取日志" 按钮，见证奇迹发生！
@@ -226,8 +229,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 2. **配置设置**
    ```bash
-   # 编辑 config.yaml 文件
-   nano config.yaml
+   # 配置文件将从模板自动创建
+   python gui.py
    ```
 
 3. **运行程序**
@@ -247,14 +250,14 @@ python build.py
 - `dist/GitCommitTool.exe` - 独立可执行文件
 - `GitCommitTool_Portable/` - 包含所有文件的便携版
 
-### 🛠️ 配置
+### 🛠️ 配置说明
 
 工具使用模板化配置管理系统，确保个人配置安全：
 
 #### 📋 配置文件结构
 ```
-config.template.yaml  # 配置模板 (版本控制)
-config.yaml          # 个人配置 (自动忽略)
+config.template.yaml  # 配置模板（版本控制）
+config.yaml          # 个人配置（自动忽略）
 ```
 
 #### 🔄 首次配置
@@ -263,10 +266,10 @@ config.yaml          # 个人配置 (自动忽略)
 ```yaml
 # 基本配置
 root_directory: "C:\\workspace"          # Git仓库根目录
-author: "你的Git用户名"                   # Git作者名  
+author: "你的Git用户名"                   # Git作者名
 output_directory: "~/Desktop"           # 输出目录
 
-# 时间范围 (可选)
+# 时间范围（可选）
 start_date: ""                          # 开始日期 YYYY-MM-DD
 end_date: ""                            # 结束日期 YYYY-MM-DD
 
@@ -293,3 +296,44 @@ project_names:
 ### 📋 输出示例
 
 ```
+🎯 提交记录摘要 (2024-01-15):
+
+我的项目-添加用户认证系统
+我的项目-修复登录验证bug
+后端API-实现新的REST接口
+后端API-更新数据库架构
+移动应用-增强UI响应性
+
+📊 总计：3个项目共5次提交
+⏱️ 生成时间：2024-01-15 18:30:22
+```
+
+### 🤝 贡献指南
+
+我们欢迎任何形式的贡献！请查看我们的[贡献指南](CONTRIBUTING.md)了解详情。
+
+1. Fork 本仓库
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 创建 Pull Request
+
+### 📄 许可证
+
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+
+### 🙏 致谢
+
+- 感谢所有为改进此工具做出贡献的开发者
+- 灵感来源于全世界开发者的日常需求
+- 用 ❤️ 和大量的 ☕ 精心打造
+
+---
+
+<div align="center">
+
+### 🌟 如果这个项目对你有帮助，请给个星标！ 
+
+**Made with ❤️ by developers, for developers**
+
+</div>
